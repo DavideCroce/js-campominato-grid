@@ -45,3 +45,9 @@ span{
     flex-wrap: wrap;
     background-color: rgb(96, 96, 224);
 }
+
+.cella{
+    
+    border: 3px solid white;
+    color: white;
+}
