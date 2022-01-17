@@ -32,6 +32,9 @@ const onerndNumb = (min, max) => {
         rNumb = rndNumb(min, max);
     }
     while (NumbEs.includes(rNumb));
+
+    NumbEs.push(rNumb);
+    return rNumb;
 }
 
 // TAKE THE GRID
@@ -40,20 +43,50 @@ const griglia = document.getElementsByClassName('grid');
 
 // CREATION OF THE CELLS
 
-function creaCells() {
+function creaCells(cols) {
     const cella = document.createElement('div');
     cella.className = 'cella';
-    const rNumb = onerndNumb(min, max);
+    cella.style.width = `calc(100% / ${cols})`;
+    cella.style.height = `calc(100% / ${cols})`;
+    const rNumb = onerndNumb(1, cols * cols);
+    cella.id = rNumb;
+    cella.innerText = rNumb;
+    return cella;
 }
 
-let difficoltà = document.getElementById('diff');
+const diffic = document.getElementById('diff');
 
-if(difficoltà === 'diff1'){
-    creaCells(1, 100);
+const selezione = document.getElementsByTagName('option');
+
+selezione.addEventListener('select', () =>{
+
+})
+
+if(diffic.value === 'diff1'){
+    creaCells(10);
 }
-else if(difficoltà === 'diff2'){
-    creaCells(1, 81);
+else if(diffic.value === 'diff2'){
+    creaCells(9);
 }
-else if(difficoltà === 'diff3'){
-    creaCells(1, 49);
+else if(diffic.value === 'diff3'){
+    creaCells(7);
 }
+
+// CELL
+
+for (let i = 0; i < totale; i++){
+    const cNumb = onerndNumb(1, cols * cols, NumbEs);
+    
+    NumbEs.push(cNumb);
+
+    const cella = crea(cNumb);
+
+    cella.addEventListener('click', () => {
+        cella.classList.toggle('cliccato');
+    }
+    
+    );
+
+    grid.appendChild(cella);
+}
+
